@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语单词听力播放器</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1E293B',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .transition-custom {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .card-hover {
+                @apply hover:shadow-lg hover:-translate-y-1 transition-custom;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-light to-gray-100 min-h-screen font-sans text-dark">
+    <!-- 顶部导航栏 -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-headphones text-primary text-2xl"></i>
+                <h1 class="text-[clamp(1.2rem,3vw,1.8rem)] font-bold text-dark">英语单词听力播放器</h1>
+            </div>
+            <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 transition-custom">
+                <i class="fa fa-moon-o text-dark"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 书籍选择 -->
+        <section class="mb-10">
+            <h2 class="text-[clamp(1rem,2vw,1.5rem)] font-semibold mb-4 text-dark">选择书籍</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3" id="book-selection">
+                <!-- 书籍卡片将通过JS动态生成 -->
+            </div>
+        </section>
+
+        <!-- 单元选择 -->
+        <section class="mb-10 hidden" id="unit-section">
+            <h2 class="text-[clamp(1rem,2vw,1.5rem)] font-semibold mb-4 text-dark">选择单元</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3" id="unit-selection">
+                <!-- 单元卡片将通过JS动态生成 -->
+            </div>
+        </section>
+
+        <!-- 音频播放器 -->
+        <section class="mb-10 hidden" id="player-section">
+            <div class="bg-white rounded-xl shadow-md p-6 max-w-2xl mx-auto transform transition-all duration-300 hover:shadow-lg">
+                <h2 class="text-xl font-semibold mb-2 text-center" id="current-selection">必修一 - 第一单元</h2>
+                <div class="flex items-center justify-center my-6">
+                    <div class="relative w-32 h-32 md:w-40 md:h-40 bg-primary/10 rounded-full flex items-center justify-center overflow-hidden">
+                        <i class="fa fa-volume-up text-primary text-5xl md:text-6xl"></i>
+                        <div class="absolute inset-0 bg-primary/5 rounded-full animate-pulse"></div>
+                    </div>
+                </div>
+                <audio id="audio-player" controls class="w-full mb-6">
+                    <source src="" type="audio/mpeg">
+                    您的浏览器不支持音频播放。
+                </audio>
+                <div class="flex justify-between items-center">
+                    <button id="prev-btn" class="p-3 rounded-full bg-gray-100 hover:bg-gray-200 transition-custom disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        <i class="fa fa-step-backward"></i>
+                    </button>
+                    <button id="play-pause-btn" class="p-4 rounded-full bg-primary text-white hover:bg-primary/90 transition-custom">
+                        <i class="fa fa-play"></i>
+                    </button>
+                    <button id="next-btn" class="p-3 rounded-full bg-gray-100 hover:bg-gray-200 transition-custom disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        <i class="fa fa-step-forward"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-6 mt-auto">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">© 2023 英语单词听力播放器 | 设计与开发</p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
